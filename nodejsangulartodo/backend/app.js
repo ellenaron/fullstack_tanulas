@@ -54,5 +54,30 @@ export function buildApp({ pool, bcrypt }) {
         });
     });
 
+    app.post('/login', (req, res) => {
+        const { email, password } = req.body;
+
+        if (!email || !password)
+            return res.status(400).json({ message: 'Missing credentials.' });
+
+        let sql = 'SELECT * FROM users WHERE email = ?';
+        pool.query(sql, [email], (err, result) => {
+            if (err) return res.status(500).json({ message: err });
+            if (result.length == 0)
+                return res.status(400).json({ message: 'User not found.' });
+
+            bcrypt.compare(password, result[0].hash, (err, match) => {
+                if (err) return res.status(500).json({ message: err });
+                if (!match)
+                    return res
+                        .status(400)
+                        .json({ message: 'Incorrect password' });
+
+                req.session.user_id = result[0].id;
+                return res.status(200).json({ message: 'Logged in.' });
+            });
+        });
+    });
+
     return app;
 }
