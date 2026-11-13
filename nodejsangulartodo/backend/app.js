@@ -29,24 +29,30 @@ export function buildApp({ pool, bcrypt }) {
     app.post('/signup', (req, res) => {
         const { username, email, password } = req.body;
 
-        if (!username || !email || !password) return res.status(400).json({ error: 'Missing credentials' });
+        if (!username || !email || !password)
+            return res.status(400).json({ message: 'Missing credentials.' });
 
         let sql = 'SELECT id FROM users WHERE email = ?';
-        pool.query(sql, [email], (err, rows) => {
-            if (err) return res.status(500).json({ error: err });
-            if (rows.lenght > 1) return res.status(400).json({ error: 'User already exists'});
-            
+        pool.query(sql, [email], (err, result) => {
+            if (err) return res.status(500).json({ message: err });
+            if (result.length > 0)
+                return res
+                    .status(400)
+                    .json({ message: 'User already exists.' });
+
             bcrypt.hash(password, 10, (err, hash) => {
-                if (err) return res.status(500).json({ error: err });
+                if (err) return res.status(500).json({ message: err });
 
-                sql = 'INSERT INTO users(username, email, hash) VALUES (?, ?, ?)';
-                pool.query(sql, [username, email, hahs], (err, rows) => {
+                sql =
+                    'INSERT INTO users(username, email, hash) VALUES (?, ?, ?)';
+                pool.query(sql, [username, email, hash], (err, result) => {
+                    if (err) return res.status(500).json({ message: err });
 
-                }))
-            })
-            
-        })
-    })
-    
+                    return res.status(201).json({ message: 'User created.' });
+                });
+            });
+        });
+    });
+
     return app;
 }

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS todos(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     task MEDIUMTEXT NOT NULL,
-    completed BOOLEAN NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT user_todos_connection FOREIGN KEY (user_id) REFERENCES users(id)
 );
