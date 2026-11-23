@@ -1,67 +1,34 @@
 import { NavLink } from 'react-router';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home } from 'lucide-react';
 import { useState } from 'react';
+import Get from './methodIcons/Get';
+import NavHeader from './navbar/NavHeader';
+import NavItem from './navbar/NavItem';
 
 function Navbar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <nav className={`w-screen ${open ? "" : "h-10"} overflow-hidden bg-blue-600 md:w-50 md:h-screen`}>
-            <button className="p-2 hover:bg-blue-700 md:hidden" onClick={() => setOpen(!open)}>
+        <nav
+            className={`w-screen ${open ? '' : 'h-14'} overflow-hidden bg-blue-600 md:w-60 md:h-screen`}
+        >
+            <button
+                className="p-2 m-2 rounded-md hover:bg-blue-700 md:hidden"
+                onClick={() => setOpen(!open)}
+            >
                 {open ? (
                     <X color="oklch(96% 0.002 17.2)" scale={24} />
                 ) : (
                     <Menu color="oklch(96% 0.002 17.2)" scale={24} />
                 )}
             </button>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/"
-            >
-                <p>Otthon</p>
-            </NavLink>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/lekerdezesek"
-            >
-                <p>Bérletek</p>
-            </NavLink>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/elerhetoek"
-            >
-                <p>Elérhető</p>
-            </NavLink>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/kereses"
-            >
-                <p>Keresés</p>
-            </NavLink>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/statisztika"
-            >
-                <p>Statisztika</p>
-            </NavLink>
-            <NavLink
-                className={({ isActive }) =>
-                    `text-taupe-100 flex py-2 px-4 gap-2 hover:bg-blue-700 justify-start items-center ${isActive ? 'bg-blue-700' : ""}`
-                }
-                to="/dragak"
-            >
-                <p>Drágák</p>
-            </NavLink>
+            <NavHeader />
+            <NavItem icon={<Home scale={24} color="oklch(96% 0.002 17.2)" />} page='Otthon' route="/" />
+            <NavItem icon={<Get />} page='Bérletek' route='/lekerdezesek' />
+            <NavItem icon={<Get />} page='Elérhető' route='/lekerdezesek/elerhetoek' />
+            <NavItem icon={<Get />} page='Keresés' route='/lekerdezesek/kereses' />
+            <NavItem icon={<Get />} page='Statisztika' route='/lekerdezesek/statisztika' />
+            <NavItem icon={<Get />} page='Drágák' route='/lekerdezesek/dragak' />
         </nav>
     );
 }
