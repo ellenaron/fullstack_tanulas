@@ -6,15 +6,15 @@ import Elerhetoek from './pages/Elerhetoek';
 import Kereses from './pages/Kereses';
 import Statisztika from './pages/Statisztika';
 import Dragak from './pages/Dragak';
-import Home from './pages/Home'
+import Home from './pages/Home';
 
 function App() {
     return (
         <BrowserRouter>
-            <div className='h-screen w-screen flex flex-col md:flex-row'>
+            <div className="h-screen w-screen flex flex-col md:flex-row">
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/lekerdezesek" element={<Queries />}>
                         <Route index element={<Berletek />} />
                         <Route path="elerhetoek" element={<Elerhetoek />} />
