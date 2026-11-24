@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router';
 import { Menu, X, Home } from 'lucide-react';
 import { useState } from 'react';
 import Get from './methodIcons/Get';
