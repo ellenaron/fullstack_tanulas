@@ -4,6 +4,7 @@ import QueryHeader from '../components/QueryHeader';
 
 function Statisztika() {
     const [data, setData] = useState([]);
+    const [pretty, setPretty] = useState(false);
     useEffect(() => {
         fetch('http://localhost:8080/tipusok/statisztika')
             .then((res) => res.json())
@@ -16,7 +17,8 @@ function Statisztika() {
             <p>Az atabázisban található adatokból összeállít egy statisztikai összegzést. A típusokat nézni, hogy mi a nevük, hány bérlet hivatkozik rájuk, és mennyi az átlagos áruk.</p>
             <h3 className="text-zinc-800 font-bold my-2">Viszzatért body:</h3>
             <div className="w-full p-4 box-border border-2 border-zinc-500 rounded-md overflow-auto h-96 scrollbar-thumb-blue-600">
-                {JSON.stringify(data)}
+                <button className='font-mono font-bold bg-blue-600 hover:bg-blue-700 text-taupe-200 py-2 px-4 rounded-md' onClick={() => setPretty(!pretty)}>{pretty ? "Compact" : "Pretty"}</button>
+                <p>{pretty ? JSON.stringify(data) : JSON.stringify(data, null, 2)}</p>
             </div>
             <table className="w-full my-4 border-spacing-2 border-zinc-400 border-separate rounded-md">
                 <thead>

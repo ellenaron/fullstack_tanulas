@@ -5,6 +5,7 @@ import QueryHeader from '../components/QueryHeader';
 function Kereses() {
     const [data, setData] = useState([]);
     const [szoveg, setSzoveg] = useState('');
+    const [pretty, setPretty] = useState(false);
     useEffect(() => {
         if (szoveg) {
             fetch('http://localhost:8080/berletek/kereses/' + szoveg)
@@ -33,7 +34,8 @@ function Kereses() {
             />
             <h3 className="text-zinc-800 font-bold my-2">Viszzatért body:</h3>
             <div className="w-full p-4 box-border border-2 border-zinc-500 rounded-md overflow-auto h-96 scrollbar-thumb-blue-600">
-                {JSON.stringify(data)}
+                <button className='font-mono font-bold bg-blue-600 hover:bg-blue-700 text-taupe-200 py-2 px-4 rounded-md' onClick={() => setPretty(!pretty)}>{pretty ? "Compact" : "Pretty"}</button>
+                <p>{pretty ? JSON.stringify(data) : JSON.stringify(data, null, 2)}</p>
             </div>
             <table className="w-full my-4 border-spacing-2 border-zinc-400 border-separate rounded-md">
                 <thead>
