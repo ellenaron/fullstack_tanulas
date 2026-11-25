@@ -14,19 +14,32 @@ function Statisztika() {
     return (
         <div className="p-4">
             <QueryHeader icon={<Get />} path="/berletek" />
-            <p>Az atabázisban található adatokból összeállít egy statisztikai összegzést. A típusokat nézni, hogy mi a nevük, hány bérlet hivatkozik rájuk, és mennyi az átlagos áruk.</p>
+            <p>
+                Az atabázisban található adatokból összeállít egy statisztikai
+                összegzést. A típusokat nézni, hogy mi a nevük, hány bérlet
+                hivatkozik rájuk, és mennyi az átlagos áruk.
+            </p>
             <h3 className="text-zinc-800 font-bold my-2">Viszzatért body:</h3>
             <div className="w-full p-4 box-border border-2 border-zinc-500 rounded-md overflow-auto h-96 scrollbar-thumb-blue-600">
-                <button className='font-mono font-bold bg-blue-600 hover:bg-blue-700 text-taupe-200 py-2 px-4 rounded-md' onClick={() => setPretty(!pretty)}>{pretty ? "Compact" : "Pretty"}</button>
-                <p>{pretty ? JSON.stringify(data) : JSON.stringify(data, null, 2)}</p>
+                <button
+                    className="font-mono font-bold bg-blue-600 hover:bg-blue-700 text-taupe-200 py-2 px-4 rounded-md"
+                    onClick={() => setPretty(!pretty)}
+                >
+                    {pretty ? 'Compact' : 'Pretty'}
+                </button>
+                <p>
+                    {pretty
+                        ? JSON.stringify(data)
+                        : JSON.stringify(data, null, 2)}
+                </p>
             </div>
             <table className="w-full my-4 border-spacing-2 border-zinc-400 border-separate rounded-md">
                 <thead>
                     <tr className="bg-zinc-300">
-                        <th className="font-mono text-zinc-800 rounded-md">
+                        <th className="font-mono text-zinc-800 rounded-md w-1/2">
                             Paraméter
                         </th>
-                        <th className="font-mono text-zinc-800 rounded-md">
+                        <th className="font-mono text-zinc-800 rounded-md w-1/2">
                             Magyarázat
                         </th>
                     </tr>
@@ -69,10 +82,10 @@ function Statisztika() {
                     >
                         <thead>
                             <tr className="bg-zinc-300">
-                                <th className="font-mono text-zinc-800 rounded-md">
+                                <th className="font-mono text-zinc-800 rounded-md w-1/2">
                                     Paraméter
                                 </th>
-                                <th className="font-mono text-zinc-800 rounded-md">
+                                <th className="font-mono text-zinc-800 rounded-md w-1/2">
                                     Érték
                                 </th>
                             </tr>
